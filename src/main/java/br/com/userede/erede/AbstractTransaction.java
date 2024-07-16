@@ -85,6 +85,10 @@ public class AbstractTransaction<C> {
     private String paymentFacilitatorID;
     @SerializedName("subMerchant")
     private SubMerchant subMerchant;
+    @SerializedName("qrCodeResponse")
+    private QRCode qrCode;
+    @SerializedName("qrCode")
+    private QRCode qrCodeRequest;
 
     public Brand getBrand() {
         return brand;
@@ -473,5 +477,34 @@ public class AbstractTransaction<C> {
 
     public void setSubMerchant(SubMerchant subMerchant) {
         this.subMerchant = subMerchant;
+    }
+
+    public QRCode getQrCodeResponse() {
+        return qrCode;
+    }
+
+    public void setQrCodeResponse(QRCode qrCode) {
+        this.qrCode = qrCode;
+    }
+
+    public QRCode getQrCode() {
+        return qrCode;
+    }
+
+    public void setQrCode(QRCode qrCode) {
+        this.qrCode = qrCode;
+    }
+
+    public QRCode getQrCodeRequest() {
+        return qrCodeRequest;
+    }
+
+    public void setQrCodeRequest(QRCode qrCodeRequest) {
+        this.qrCodeRequest = qrCodeRequest;
+    }
+
+    public AbstractTransaction<C> setQRCode(String dateTimeExpiration) {
+        qrCode = new QRCode(dateTimeExpiration);
+        return this;
     }
 }

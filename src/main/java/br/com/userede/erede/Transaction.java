@@ -1,9 +1,13 @@
 package br.com.userede.erede;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Transaction extends AbstractTransaction<Boolean> {
 
     public static final String CREDIT = "credit";
     public static final String DEBIT = "debit";
+    public static final String PIX = "Pix";
 
     public static final Integer ORIGIN_EREDE = 1;
     public static final Integer ORIGIN_VISA_CHECKOUT = 4;
@@ -27,9 +31,21 @@ public class Transaction extends AbstractTransaction<Boolean> {
         if (!capture && getKind().equals(Transaction.DEBIT)) {
             throw new IllegalArgumentException("Debit transactions will always be captured");
         }
+        if (!capture && getKind().equals(Transaction.PIX)) {
+            throw new IllegalArgumentException("Pix transactions does not support capture");
+        }
 
         setCapture(capture);
 
+        return this;
+    }
+
+    public Transaction pix(Date expirationDate) {
+        setKind(Transaction.PIX);
+        setCapture(true);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        String formattedDate = formatter.format(expirationDate);
+        setQRCode(formattedDate);
         return this;
     }
 
