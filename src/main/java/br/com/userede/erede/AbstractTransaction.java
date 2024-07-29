@@ -504,7 +504,7 @@ public class AbstractTransaction<C> {
     }
 
     public AbstractTransaction<C> setQRCode(String dateTimeExpiration) {
-        qrCode = new QRCode(dateTimeExpiration);
+        this.qrCodeRequest = new QRCode(dateTimeExpiration);;
         return this;
     }
 }

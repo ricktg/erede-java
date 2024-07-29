@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class QRCode {
 
+    public QRCode() {
+    }
+
     public QRCode(String dateTimeExpiration) {
         this.dateTimeExpiration = dateTimeExpiration;
     }
